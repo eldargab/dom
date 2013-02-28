@@ -1,0 +1,18 @@
+{
+  "name": "dom",
+  "description": "DOM manipulation utilities",
+  "version": "0.0.1",
+  "dependencies": {
+    "component/event": "*",
+    "component/classes": "*",
+    "component/domify": "*",
+    "component/css": "*"
+  },
+  "development": {
+    "visionmedia/mocha": "*",
+    "component/assert": "*"
+  },
+  "scripts": [
+    "index.js"
+  ]
+}
