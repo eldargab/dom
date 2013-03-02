@@ -23,7 +23,7 @@ dom.firstChild = function (el) {
   return child
 }
 
-dom.each = function (sel, ctx, fn, that) {
+dom.forEach = function (sel, ctx, fn, that) {
   if (typeof ctx == 'function') {
     that = fn
     fn = ctx
