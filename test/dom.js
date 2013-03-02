@@ -53,3 +53,27 @@ describe('.insertAfter()', function () {
     assert(html.textContent == 'Hello world')
   })
 })
+
+describe('.addClass()', function () {
+  it('should add class to element', function () {
+    var el = dom('<div>')
+    dom.addClass('foo', el)
+    assert(el.className == 'foo')
+  })
+})
+
+describe('.removeClass()', function () {
+  it('should remove class from element', function () {
+    var el = dom('<div class="foo bar baz">')
+    dom.removeClass('foo', el)
+    assert(el.className == 'bar baz')
+  })
+})
+
+describe('.hasClass()', function () {
+  it('should check for presence of class', function () {
+    var el = dom('<div class="foo bar">')
+    assert(dom.hasClass('bar', el))
+    assert(!dom.hasClass('baz', el))
+  })
+})

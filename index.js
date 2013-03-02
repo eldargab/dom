@@ -63,8 +63,8 @@ dom.removeClass = function (cl, el) {
 }
 
 dom.hasClass = function (cl, el) {
-  el.classList
-    ? el.classList.has(cl)
+  return el.classList
+    ? el.classList.contains(cl)
     : classes(el).has(cl)
 }
 
