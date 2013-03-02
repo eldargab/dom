@@ -78,3 +78,11 @@ dom.remove = function (el) {
 dom.replace = function (n, old) {
   old.parentNode.replaceChild(n, old)
 }
+
+dom.insertBefore = function (n, ref) {
+  ref.parentNode.insertBefore(n, ref)
+}
+
+dom.insertAfter = function (n, ref) {
+  ref.parentNode.insertBefore(n, ref.nextSibling)
+}

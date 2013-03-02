@@ -26,3 +26,30 @@ describe('.firstChild()', function () {
     assert(child.nodeType == 1)
   })
 })
+
+describe('.remove()', function () {
+  it('should remove element', function () {
+    var html = dom('<div><p>Hello</p></div>')
+    var el = dom('p', html)
+    dom.remove(el)
+    assert(html.textContent == '')
+  })
+})
+
+describe('.insertBefore(new, ref)', function () {
+  it('should insert new before ref', function () {
+    var html = dom('<div><span> world</span></div>')
+    var world = dom('span', html)
+    dom.insertBefore(dom('<span>Hello</span>'), world)
+    assert(html.textContent == 'Hello world')
+  })
+})
+
+describe('.insertAfter()', function () {
+  it('should insert new element after ref', function () {
+    var html = dom('<div><span>Hello</span></div>')
+    var hello = dom('span', html)
+    dom.insertAfter(dom('<span> world</span>'), hello)
+    assert(html.textContent == 'Hello world')
+  })
+})
