@@ -63,6 +63,14 @@ dom.hasClass = function (cl, el) {
   return el.classList.contains(cl)
 }
 
+dom.toggle = function(cl, on, el) {
+  if (on) {
+    el.classList.add(cl)
+  } else {
+    el.classList.remove(cl)
+  }
+}
+
 dom.remove = function (el) {
   var parent = el.parentNode
   parent && parent.removeChild(el)

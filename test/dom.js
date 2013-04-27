@@ -77,3 +77,21 @@ describe('.hasClass()', function () {
     assert(!dom.hasClass('baz', el))
   })
 })
+
+describe('.toggle(cl, on, el)', function() {
+  it('when "on" should add class', function() {
+    var el = dom('<div class="foo">')
+    dom.toggle('hello', true, el)
+    dom.toggle('foo', true, el)
+    assert(dom.hasClass('hello', el))
+    assert(dom.hasClass('foo', el))
+  })
+
+  it('when "off" should remove class', function() {
+    var el = dom('<div class="foo">')
+    dom.toggle('foo', false, el)
+    dom.toggle('bar', false, el)
+    assert(!dom.hasClass('foo', el))
+    assert(!dom.hasClass('bar', el))
+  })
+})
