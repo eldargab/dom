@@ -1,11 +1,16 @@
 test: build
 	@open ./test/index.html
 
-build:
+build: components
 	@component build --dev
 
-install:
-	@npm install component
+components: node_modules component.json
 	@component install --dev
 
-.PHONY: install build test
+node_modules:
+	@npm install component@0.16.7
+
+clean:
+	@rm -rf components build node_modules
+
+.PHONY: build test clean

@@ -27,6 +27,14 @@ describe('.firstChild()', function () {
   })
 })
 
+describe('.lastChild()', function() {
+  it('should return last element child', function () {
+    var el = dom('#foo')
+    var child = dom.lastChild(el)
+    assert(child.nodeType == 1)
+  })
+})
+
 describe('.remove()', function () {
   it('should remove element', function () {
     var html = dom('<div><p>Hello</p></div>')

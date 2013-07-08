@@ -1,9 +1,11 @@
 {
   "name": "dom",
   "description": "DOM manipulation utilities",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
-    "component/domify": "*"
+    "component/domify": "1.0.0",
+    "component/event": "*",
+    "component/classes": "*"
   },
   "development": {
     "visionmedia/mocha": "*",

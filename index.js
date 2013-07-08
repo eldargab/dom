@@ -1,73 +1,67 @@
 var domify = require('domify')
+  , classes = require('classes')
+  , event = require('event')
 
 module.exports = dom
 
 function dom (html, ctx) {
   return html[0] == '<'
-    ? domify(html)[0]
+    ? domify(html)
     : (ctx || document).querySelector(html)
 }
 
-dom.on = function(el, type, fn, capture) {
-  el.addEventListener(type, fn, capture || false)
+dom.find = function(sel, ctx) {
+  var list = (ctx || document).querySelectorAll(sel)
+  return Array.prototype.slice.call(list)
 }
 
-dom.off = function(el, type, fn, capture) {
-  el.removeEventListener(type, fn, capture || false)
+function next(el) {
+  while(el && el.nodeType != 1) {
+    el = el.nextSibling
+  }
+  return el
 }
 
-dom.firstChild = function (el) {
-  var child = el.firstChild
-  while (child && child.nodeType != 1) {
-    child = child.nextSibling
+function prev(el) {
+  while(el && el.nodeType != 1) {
+    el = el.previousSibling
   }
-  return child
+  return el
 }
 
-dom.forEach = function (sel, ctx, fn, that) {
-  if (typeof ctx == 'function') {
-    that = fn
-    fn = ctx
-    ctx = document
-  }
-  var list = ctx.querySelectorAll(sel)
-  for (var i = 0; i < list.length; i++) {
-    fn.call(that, list[i])
-  }
+dom.firstChild = function(el) {
+  return next(el.firstChild)
 }
 
-dom.map = function (sel, ctx, fn, that) {
-  if (typeof ctx == 'function') {
-    that = fn
-    fn = ctx
-    ctx = document
-  }
-  var list = ctx.querySelectorAll(sel)
-  var ret = new Array(list.length)
-  for (var i = 0; i < list.length; i++) {
-    ret[i] = fn.call(that, list[i])
-  }
-  return ret
+dom.lastChild = function(el) {
+  return prev(el.lastChild)
 }
 
+dom.next = function(el) {
+  return next(el.nextSibling)
+}
+
+dom.prev = function(el) {
+  return prev(el.previousSibling)
+}
 
 dom.addClass = function (cl, el) {
-  el.classList.add(cl)
+  classes(el).add(cl)
 }
 
 dom.removeClass = function (cl, el) {
-  el.classList.remove(cl)
+  classes(el).remove(cl)
 }
 
 dom.hasClass = function (cl, el) {
-  return el.classList.contains(cl)
+  return classes(el).has(cl)
 }
 
 dom.toggle = function(cl, on, el) {
   if (on) {
-    el.classList.add(cl)
+    dom.addClass(cl, el)
   } else {
-    el.classList.remove(cl)
+    dom.removeClass(cl, el)
   }
 }
 
@@ -86,4 +80,12 @@ dom.insertBefore = function (n, ref) {
 
 dom.insertAfter = function (n, ref) {
   ref.parentNode.insertBefore(n, ref.nextSibling)
+}
+
+dom.on = function(el, type, fn, capture) {
+  return event.bind(el, type, fn, capture || false)
+}
+
+dom.off = function(el, type, fn, capture) {
+  return event.unbind(el, type, fn, capture || false)
 }
